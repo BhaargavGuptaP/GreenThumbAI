@@ -57,4 +57,4 @@ class _AddState extends State<Add> {
     );
   }
 }
-//image,describe ur garden and climatic conditions, mention ur extent of sunshine temp and soil condition(well drained, sandy, etc)
+//image, describe ur garden and climatic conditions, mention ur extent of sunshine temp and soil condition(well drained, sandy, etc)
