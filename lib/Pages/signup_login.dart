@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, sized_box_for_whitespace, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:greenthumbai/Pages/home.dart';
+import 'package:greenthumbai/Pages/newhome.dart';
 
 class Login_Signup extends StatefulWidget {
   const Login_Signup({super.key});
@@ -174,7 +174,7 @@ class _Login_SignupState extends State<Login_Signup> {
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Home()));
+            .push(MaterialPageRoute(builder: (context) => NewHome()));
       },
       child: Container(
         height: hei * 0.06,
