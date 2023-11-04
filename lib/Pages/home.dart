@@ -109,8 +109,8 @@ class _HomeState extends State<Home> {
                           ? selectedTab(hei, wid, 'Unhealthy Plants')
                           : nonSelectedTab(hei, wid, 'Unhealthy Plants'),
                       !a
-                          ? selectedTab(hei, wid, 'Recovered Plants')
-                          : nonSelectedTab(hei, wid, 'Recovered Plants'),
+                          ? selectedTab(hei, wid, 'Healthy Plants')
+                          : nonSelectedTab(hei, wid, 'Healthy Plants'),
                     ],
                   ),
                   margin: EdgeInsets.only(top: 20),
