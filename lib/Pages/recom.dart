@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'more_details.dart';
+
 class Recom extends StatefulWidget {
   const Recom({super.key});
 
@@ -35,6 +37,7 @@ class _RecomState extends State<Recom> {
   int i1 = -1;
   int i2 = -1;
   int i3 = -1;
+  bool x = false;
   @override
   Widget build(BuildContext context) {
     var hei = MediaQuery.of(context).size.height;
@@ -181,7 +184,11 @@ class _RecomState extends State<Recom> {
               ),
               SizedBox(height: 30),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    x = true;
+                  });
+                },
                 child: Container(
                     height: 60,
                     width: wid * 0.4,
@@ -210,26 +217,46 @@ class _RecomState extends State<Recom> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 20, left: 30, right: 20),
-                child: Text(
-                  '1. Tomato',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 20, left: 30, right: 20),
-                child: Text(
-                  '2. Brinjal',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
+              x
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: hei * 0.03),
+                        items('1. Tomato'),
+                        items('2. Brinjal'),
+                        items('3. Chilli'),
+                        items('4. Potato'),
+                        items('5. Onion'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => More()));
+                          },
+                          child: Container(
+                            height: 60,
+                            width: wid * 0.4,
+                            margin: EdgeInsets.only(top: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.green,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'More Details',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container(),
             ],
           ),
           a
@@ -359,6 +386,19 @@ class _RecomState extends State<Recom> {
                 )
               : Container(),
         ],
+      ),
+    );
+  }
+
+  Container items(String s) {
+    return Container(
+      margin: EdgeInsets.only(top: 20, left: 30, right: 20),
+      child: Text(
+        s,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
