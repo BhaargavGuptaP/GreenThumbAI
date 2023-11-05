@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:csv/csv.dart';
 
 import 'more_details.dart';
 
@@ -38,6 +40,18 @@ class _RecomState extends State<Recom> {
   int i2 = -1;
   int i3 = -1;
   bool x = false;
+  List<List<dynamic>> _data = [];
+  void _loadCSV() async {
+    final _rawData = await rootBundle.loadString("assets/plantinfo_clean.csv");
+    List<List<dynamic>> _listData = CsvToListConverter().convert(_rawData);
+    setState(() {
+      _data = _listData;
+    });
+    print(_listData);
+  }
+
+  List<List<dynamic>> d = [];
+
   @override
   Widget build(BuildContext context) {
     var hei = MediaQuery.of(context).size.height;
@@ -185,6 +199,14 @@ class _RecomState extends State<Recom> {
               SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
+                  _loadCSV();
+                  // for (int i = 0; i < _data.length; i++) {
+                  //   if (_data[i][7] == climate[i1] &&
+                  //       _data[i][8] == sun[i2] &&
+                  //       _data[i][9] == soil[i3]) {
+                  //     d.add(_data[i]);
+                  //   }
+                  // }
                   setState(() {
                     x = true;
                   });
@@ -222,11 +244,18 @@ class _RecomState extends State<Recom> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: hei * 0.03),
-                        items('1. Tomato'),
-                        items('2. Brinjal'),
-                        items('3. Chilli'),
-                        items('4. Potato'),
-                        items('5. Onion'),
+                        Container(
+                          height: hei * 0.2,
+                          child: SingleChildScrollView(
+                            physics: ScrollPhysics(),
+                            child: ListView.builder(
+                              itemBuilder: (context, index) {
+                                return items(d[index][0]);
+                              },
+                              itemCount: d.length,
+                            ),
+                          ),
+                        ),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
